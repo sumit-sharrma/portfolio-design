@@ -1,82 +1,86 @@
+// ──────────────────────────────────────────────────────────────
+// src/app/layout.tsx
+// Root layout: fonts, nav, footer, motion + inspect providers.
+// Page content animates in via src/app/template.tsx.
+// ──────────────────────────────────────────────────────────────
 import type { Metadata, Viewport } from "next";
+import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { GridOverlayProvider } from "@/components/ui/GridOverlay";
-import { DevToolsPanel } from "@/components/ui/DevToolsPanel";
-import { GridOverlayShortcut } from "@/components/ui/GridOverlayShortcut";
+import { SiteNav } from "@/components/site/SiteNav";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { MotionProvider } from "@/components/motion/MotionProvider";
+import { InspectProvider } from "@/components/inspect/Inspect";
+import { site } from "@/lib/site";
+
+// Display: headlines, names, big numerals (uses the width axis)
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  axes: ["wdth", "opsz"],
+  variable: "--face-display",
+  display: "swap",
+});
+
+// Text: everything you read
+const text = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--face-text",
+  display: "swap",
+});
+
+// Code: tags, metadata, spec labels
+const code = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--face-code",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Sumit Sharma — Lead Product Designer, Design Systems Engineer",
-  description: "Design Systems & Platform UX Lead. Building token pipelines, governance tools, and component libraries that scale across 130+ stakeholders. Previously Cars24, Tide, Jupiter Money, Paytm.",
-  keywords: [
-    "Design Systems",
-    "Design Tokens",
-    "Figma",
-    "Style Dictionary",
-    "Storybook",
-    "Product Design",
-    "Platform UX",
-    "Frontend Engineering",
-    "Design Engineering",
-    "Component Libraries",
-  ],
-  authors: [{ name: "Sumit Sharma" }],
-  creator: "Sumit Sharma",
-  publisher: "Sumit Sharma",
-  robots: "index, follow",
+  metadataBase: new URL(site.url),
+  title: {
+    default: `${site.name} — Lead Product Designer, Design Systems`,
+    template: `%s — ${site.name}`,
+  },
+  description:
+    "Lead Product Designer and former Software Engineer building scalable design systems, automated tooling and AI-assisted workflows.",
+  authors: [{ name: site.name }],
   openGraph: {
     type: "website",
-    locale: "en_US",
-    url: "https://sumitsharma.design",
-    title: "Sumit Sharma — Design Systems Engineer",
-    description: "Design Systems & Platform UX Lead. Building token pipelines, governance tools, and component libraries that scale.",
-    siteName: "Sumit Sharma Portfolio",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Sumit Sharma — Design Systems Engineer",
-    description: "Design Systems & Platform UX Lead. Building token pipelines, governance tools, and component libraries that scale.",
-    creator: "@sumitsp04",
-  },
-  verification: {
-    google: "google-site-verification-code",
+    url: site.url,
+    siteName: site.name,
+    title: `${site.name} — Architecting systems where design meets logic`,
+    description:
+      "Design systems, automated tooling and AI-assisted workflows from a designer who used to ship code.",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0D0D0D" },
-    { media: "(prefers-color-scheme: dark)", color: "#0D0D0D" },
-  ],
+  themeColor: "#100f0d",
+  colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Martian+Mono:wdth,wght@75..112.5,400..700&display=swap" />
-      </head>
-      <body className="min-h-screen flex flex-col">
-        <div id="crt" aria-hidden="true"></div>
-        <GridOverlayProvider>
-          <Header />
-          <main className="flex-1 pt-[48px] md:pt-[48px]" id="main-content">
-            {children}
-          </main>
-          <Footer />
-          <DevToolsPanel />
-          <GridOverlayShortcut />
-        </GridOverlayProvider>
+    <html lang="en" className={`${display.variable} ${text.variable} ${code.variable}`}>
+      <body className="flex min-h-dvh flex-col">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-fg focus:px-3 focus:py-2 focus:text-bg"
+        >
+          Skip to content
+        </a>
+        <MotionProvider>
+          <InspectProvider>
+            <SiteNav />
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </InspectProvider>
+        </MotionProvider>
       </body>
     </html>
   );
