@@ -8,14 +8,19 @@
 //   NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN  the public project token (phc_…)
 //   NEXT_PUBLIC_POSTHOG_HOST           https://us.i.posthog.com or eu
 //
-// Only production builds send data, so local development is not counted.
+// Only production builds send data, and only when the site is served from a
+// real domain. Anything served from localhost, 127.0.0.1 or [::1] (local
+// previews and testing) is never sent to PostHog.
 // ──────────────────────────────────────────────────────────────
 import posthog from "posthog-js";
 
 const token = process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN;
 const host = process.env.NEXT_PUBLIC_POSTHOG_HOST;
 
-if (token && host && process.env.NODE_ENV === "production") {
+const LOCAL_HOSTS = new Set(["localhost", "127.0.0.1", "[::1]", "::1"]);
+const isLocal = LOCAL_HOSTS.has(window.location.hostname) || window.location.hostname.endsWith(".localhost");
+
+if (token && host && process.env.NODE_ENV === "production" && !isLocal) {
   posthog.init(token, {
     api_host: host,
     // Page views on every in-app navigation, not only the first load
