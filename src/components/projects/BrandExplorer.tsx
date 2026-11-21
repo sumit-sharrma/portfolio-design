@@ -10,6 +10,7 @@
 // ──────────────────────────────────────────────────────────────
 import { useState } from "react";
 import { motion } from "framer-motion";
+import posthog from "posthog-js";
 import type { BrandSpec } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 
@@ -26,6 +27,14 @@ export function BrandExplorer({ brands }: { brands: BrandSpec[] }) {
   // Scale the sample so desktop metrics still fit the panel.
   const k = device === "desktop" ? 0.7 : 1;
   const radius = Math.min(brand.radius, 22);
+  const selectBrand = (index: number) => {
+    posthog.capture("brand_explorer_changed", { control: "brand", option_index: index });
+    setB(index);
+  };
+  const selectDevice = (index: number) => {
+    posthog.capture("brand_explorer_changed", { control: "device", option_index: index });
+    setDevice(devices[index].key);
+  };
 
   const rows: [string, string][] = [
     ["Typography / font / family / heading", brand.heading],
@@ -38,12 +47,12 @@ export function BrandExplorer({ brands }: { brands: BrandSpec[] }) {
   return (
     <div className="panel overflow-hidden" data-spec="explorer · surface · radius.card">
       <div className="flex flex-col gap-3 border-b border-line px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-        <Segmented label="Brand" options={brands.map((x) => x.name)} value={b} onChange={setB} />
+        <Segmented label="Brand" options={brands.map((x) => x.name)} value={b} onChange={selectBrand} />
         <Segmented
           label="Device"
           options={devices.map((d) => d.label)}
           value={devices.findIndex((d) => d.key === device)}
-          onChange={(i) => setDevice(devices[i].key)}
+          onChange={selectDevice}
         />
       </div>
 

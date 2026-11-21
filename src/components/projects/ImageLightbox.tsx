@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import posthog from "posthog-js";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -46,6 +47,11 @@ export function ImageLightbox({
     };
   }, [open]);
 
+  const openLightbox = () => {
+    posthog.capture("image_lightbox_opened");
+    setOpen(true);
+  };
+
   const close = () => {
     setOpen(false);
     trigger.current?.focus();
@@ -56,7 +62,7 @@ export function ImageLightbox({
       <button
         ref={trigger}
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={openLightbox}
         aria-label={`Enlarge image: ${alt}`}
         className="group block w-full cursor-zoom-in rounded-sm text-left focus-visible:outline-offset-4"
       >

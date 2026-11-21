@@ -132,8 +132,8 @@ function MediaBody({ block }: { block: MediaBlock }) {
             </tr>
           </thead>
           <tbody className="divide-y divide-line">
-            {block.rows.map((row) => (
-              <tr key={row[0]}>
+            {block.rows.map((row, r) => (
+              <tr key={`${r}-${row[0]}`}>
                 {row.map((cell, i) => (
                   <td
                     key={i}
@@ -141,7 +141,7 @@ function MediaBody({ block }: { block: MediaBlock }) {
                       "px-4 py-2 align-top",
                       i === 0 && "text-fg",
                       i > 0 && !block.textual && "text-right font-mono text-[13px] tabular-nums",
-                      i > 0 && (cell === "none" ? "text-fg-3" : "text-fg-2"),
+                      i > 0 && (cell === "none" || cell.startsWith("No separate") ? "text-fg-3" : "text-fg-2"),
                       // in a textual Before/After table, the last column is the outcome
                       block.textual && i === row.length - 1 && "text-fg",
                     )}

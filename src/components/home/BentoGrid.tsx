@@ -16,6 +16,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import posthog from "posthog-js";
 import { inCategory, type Project } from "@/lib/projects";
 import { ProjectVisual } from "@/components/projects/ProjectVisual";
 import { Card } from "@/components/ui/Card";
@@ -132,6 +133,13 @@ function ProjectCard({ project, feature }: { project: Project; feature?: boolean
   return (
     <Link
       href={`/projects/${project.slug}`}
+      onClick={() =>
+        posthog.capture("project_opened", {
+          project_slug: project.slug,
+          project_category: project.category,
+          navigation_source: "home_work_grid",
+        })
+      }
       className="group block h-full focus-visible:outline-none"
       aria-label={`${project.title}: read the ${kind}`}
     >

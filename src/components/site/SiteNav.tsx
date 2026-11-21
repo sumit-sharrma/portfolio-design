@@ -8,6 +8,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import posthog from "posthog-js";
 import { nav, site } from "@/lib/site";
 import { useInspect } from "@/components/inspect/Inspect";
 import { cn } from "@/lib/utils";
@@ -17,6 +18,15 @@ export function SiteNav() {
   const { on, toggle } = useInspect();
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" || pathname.startsWith("/projects") : pathname.startsWith(href);
+  const toggleInspect = () => {
+    const enabled = !on;
+    posthog.capture("inspect_mode_toggled", { enabled });
+    posthog.logger.info("Portfolio inspection mode changed", {
+      event_name: "portfolio_inspection_mode_changed",
+      enabled,
+    });
+    toggle();
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg" data-spec="nav · color.bg · rule.line">
@@ -55,7 +65,7 @@ export function SiteNav() {
 
           <button
             type="button"
-            onClick={toggle}
+            onClick={toggleInspect}
             aria-pressed={on}
             title="Inspect this site's design tokens (I)"
             className={cn(

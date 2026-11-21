@@ -124,9 +124,9 @@ function McpVisual() {
   );
 }
 
-/* 03 — Slack → Jira → Sheets → Linear with a packet travelling the line. */
+/* 03 — Slack → Sheets → Linear with a packet travelling the line. */
 function PipelineVisual() {
-  const steps = ["slack", "jira", "sheets", "linear"];
+  const steps = ["slack", "sheets", "linear"];
   return (
     <div className="absolute inset-0 flex items-center px-6">
       <div className="relative flex w-full items-center justify-between">

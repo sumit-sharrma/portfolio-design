@@ -1,9 +1,11 @@
+"use client";
 // ──────────────────────────────────────────────────────────────
 // src/components/site/SiteFooter.tsx
 // Footer: availability, quick links (LinkedIn, GitHub, Resume,
 // Email) and a colophon naming what the site is set in.
 // ──────────────────────────────────────────────────────────────
 import { ArrowUpRight } from "lucide-react";
+import posthog from "posthog-js";
 import { site } from "@/lib/site";
 
 const links = [
@@ -33,6 +35,14 @@ export function SiteFooter() {
                 <li key={l.label} className="border-b border-line">
                   <a
                     href={l.href}
+                    onClick={() => {
+                      const destination = l.label.toLowerCase();
+                      posthog.capture("contact_link_clicked", { destination });
+                      posthog.logger.info("Portfolio contact link selected", {
+                        event_name: "portfolio_contact_link_selected",
+                        destination,
+                      });
+                    }}
                     {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                     className="group flex items-center justify-between py-3 text-sm text-fg-2 transition-colors duration-150 hover:text-accent"
                     data-spec="link · text.body · color.fg-2"
