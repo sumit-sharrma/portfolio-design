@@ -124,22 +124,24 @@ export function Hero() {
           className="md:col-span-5 md:col-start-8"
           data-spec="title-block · surface · rule.line"
         >
-          <dl className="panel divide-y divide-line">
-            {facts.map(([k, v]) => (
-              <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-3 px-4 py-2.5">
-                <dt className="mono-tag pt-0.5 text-fg-3">{k}</dt>
-                <dd className="text-sm text-fg">{v}</dd>
-              </div>
-            ))}
-            <div className="grid grid-cols-3 divide-x divide-line">
+          <div className="panel">
+            <dl className="divide-y divide-line">
+              {facts.map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[6.5rem_1fr] gap-3 px-4 py-2.5">
+                  <dt className="mono-tag pt-0.5 text-fg-3">{k}</dt>
+                  <dd className="text-sm text-fg">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <dl className="grid grid-cols-3 divide-x divide-line border-t border-line">
               {figures.map((f) => (
                 <div key={f.label} className="flex flex-col-reverse px-4 py-3">
                   <dt className="mt-0.5 font-mono text-micro text-fg-3">{f.label}</dt>
                   <dd className="display text-2xl font-semibold tracking-tight text-fg">{f.value}</dd>
                 </div>
               ))}
-            </div>
-          </dl>
+            </dl>
+          </div>
         </motion.div>
       </div>
     </section>

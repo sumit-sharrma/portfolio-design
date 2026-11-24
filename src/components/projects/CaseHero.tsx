@@ -33,9 +33,10 @@ export function CaseHero({ project }: { project: Project }) {
           <span data-spec="text.display · font.display · color.fg">{project.title}</span>
         </StaggerItem>
 
-        <StaggerItem as="p" className="mt-6 max-w-[60ch] text-lede text-fg-2">
+        {/* Not animated: the summary is the page's largest text and must show on first paint */}
+        <p className="mt-6 max-w-[60ch] text-lede text-fg-2">
           <span data-spec="text.lede · font.sans · color.fg-2">{project.summary}</span>
-        </StaggerItem>
+        </p>
 
         <StaggerItem>
           <dl
