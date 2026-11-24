@@ -30,7 +30,8 @@ export function ImageLightbox({
   const [open, setOpen] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
-  const remote = src.startsWith("http");
+  // Remote links and SVG files are served as they are, without the image optimizer
+  const remote = src.startsWith("http") || src.endsWith(".svg");
 
   useEffect(() => {
     if (!open) return;

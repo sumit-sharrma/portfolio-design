@@ -34,7 +34,7 @@ export function IdentitySwitcher() {
     <div>
       <Avatar shape={id.shape} color={id.color} />
 
-      <p className="display mt-6 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">{site.name}</p>
+      <h1 className="display mt-6 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">{site.name}</h1>
       <p className="display mt-1 text-3xl tracking-tight text-fg-3 sm:text-4xl" data-spec="text.title · font.display · color.fg-3">
         is a{" "}
         <span className="relative inline-block">

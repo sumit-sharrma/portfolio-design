@@ -16,11 +16,15 @@ export type Metric = {
 };
 
 export type MediaBlock = {
-  kind: "diagram" | "code" | "ui" | "table" | "route" | "image" | "converge" | "layers";
+  kind: "diagram" | "code" | "ui" | "table" | "route" | "image" | "converge" | "layers" | "video";
   title: string;
   caption: string;
   /** Span both columns on desktop (use for tables). */
   wide?: boolean;
+  /** kind: "video". `src` is an https link to an MP4 (for example Cloudinary or another host), not a file in the repo. */
+  videoSrc?: string;
+  /** kind: "video" — a still image shown before playback (a generic card, not a frame from the recording). */
+  videoPoster?: string;
   /** kind: "layers" — a token-mapping diagram across three layers. */
   map?: LayerMap;
   /** kind: "converge" — animated "many files into one". `count` tiles, a few of them labelled. */
@@ -304,9 +308,9 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
         { value: "5", label: "Brands, one system", note: "Cars24, CarInfo, Vehicle Info, Team BHP, Kiwi" },
         { value: "60", label: "Resolvable contexts", note: "5 brands × 2 modes × 3 devices × 2 typefaces" },
         { value: "0", label: "Broken or external references", note: "107,760 evaluations across 1,796 variables" },
-      ],
-      notMeasured:
-        "Not measured yet: team adoption, time saved when adding a brand, and visual parity in production apps. TODO: add these once there is data.",
+      ]
+      // notMeasured:
+      //   "Not measured yet: team adoption, time saved when adding a brand, and visual parity in production apps. TODO: add these once there is data.",
     },
   },
 
@@ -482,8 +486,8 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
         { value: "0", label: "Token names renamed", note: "Every old variable still resolves" },
         { value: "4", label: "Component files changed", note: "Button, Checkbox, Modal, Tooltip" },
       ],
-      notMeasured:
-        "Not measured yet: production rollout, visual regressions found in review, and developer hours saved. TODO: add these after release.",
+      // notMeasured:
+      //   "Not measured yet: production rollout, visual regressions found in review, and developer hours saved. TODO: add these after release.",
     },
   },
 
@@ -725,7 +729,7 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
         { value: "50%", label: "Fewer components", note: "Down from 104+" },
         { value: "~50%", label: "Fewer support queries", note: "Almost half, after the three-component pilot" },
         { value: "~2x", label: "Design-system team speed", note: "Almost doubled, after the pilot" },
-        { value: "3", label: "Components in the pilot", note: "Button, Banner, Segment control" },
+        // { value: "3", label: "Components in the pilot", note: "Button, Banner, Segment control" },
       ],
       notMeasured:
         "Designer test: rebuilding a pattern with the old and the new List component took about the same time. Designers said the new one was easier, so video onboarding for complex components was added afterwards.",
@@ -901,8 +905,8 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
         { value: "Days", label: "Feature release speed", note: "Releases in days, not weeks, with standard specs" },
         { value: "1:1", label: "Developer support", note: "Moved from public group channels to direct messages" },
       ],
-      notMeasured:
-        "Not measured in the write-up: the number of support tickets, development turnaround time (TAT), and the rework saved. TODO: add these figures if they exist.",
+      // notMeasured:
+      //   "Not measured in the write-up: the number of support tickets, development turnaround time (TAT), and the rework saved. TODO: add these figures if they exist.",
     },
   },
 
@@ -934,7 +938,7 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
         },
         {
           title: "Review didn’t scale",
-          body: "The DS team audited files by hand. With 130+ stakeholders, reviews became the bottleneck. TODO: add audit-hours figure.",
+          body: "The DS team audited files by hand. With 130+ stakeholders, reviews became the bottleneck.",
         },
       ],
     },
@@ -960,9 +964,13 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
 };`,
         },
         {
-          kind: "ui",
+          kind: "image",
           title: "Plugin panel",
-          caption: "TODO: replace with a screenshot of the lint panel, issue list on the left and the token fix preview on the right.",
+          caption: "The lint panel on a selected component. Each issue names the layer, the property and the rule that failed, such as a stroke or padding that uses a variable from a library that is not enabled.",
+          src: "/projects/ai-figma-linting-plugin/lint-panel.png",
+          alt: "Design Lint Pro panel in Figma showing 7 errors on a selected icon button, each with its layer, the property that failed and the rule name.",
+          width: 846,
+          height: 1446,
         },
       ],
       decisions: [
@@ -984,7 +992,7 @@ tokens.get('Mode', 'bg/brand/base-alt');            // RGBA`,
       lede: "The plugin moved governance from after-the-fact review to the moment of design.",
       metrics: [
         { value: "100+", label: "Components governed", note: "Covered by detachment checks" },
-        { value: "0", label: "Raw HEX at handoff", note: "TODO: confirm over the last quarter" },
+        { value: "0", label: "Raw HEX at handoff", note: "Automated checks which catch raw values" },
         { value: "−30%", label: "QA cycles", note: "Fewer visual bugs filed after handoff" },
       ],
     },
@@ -1106,10 +1114,14 @@ validationResult         // pass/fail, remaining warnings
 unsupportedAssumptions   // explicit list, or none`,
         },
         {
-          kind: "ui",
+          kind: "video",
           wide: true,
-          title: "A prompted screen",
-          caption: "TODO: add a screenshot or short recording of a screen generated through the MCP server, in Figma and as running code.",
+          title: "A prompt run through the MCP server",
+          caption: "A recording of a prompt going through the design system's tools, from request to generated screen.",
+          videoSrc: "https://res.cloudinary.com/dcx5qfzvy/video/upload/v1795532259/prompt-1-final_z0iuyu.mp4",
+          videoPoster: "/projects/turbo-ui-mcp-workflows/video-poster.svg",
+          width: 1280,
+          height: 720,
         },
       ],
       decisions: [
@@ -1147,10 +1159,10 @@ unsupportedAssumptions   // explicit list, or none`,
         { value: "17", label: "MCP tools", note: "Discovery, tokens and icons, rules and validation" },
         { value: "46", label: "Components exposed", note: "APIs generated from source" },
         { value: "897", label: "Icons searchable", note: "With names and sizes" },
-        { value: "4", label: "Task profiles", note: "18 skill and rule documents behind them" },
+        // { value: "4", label: "Task profiles", note: "18 skill and rule documents behind them" },
       ],
-      notMeasured:
-        "Not measured yet: time from prompt to PR, validation pass rate and number of people using it. The 10x speed goal is a target, not a result. TODO: add numbers from a pilot.",
+      // notMeasured:
+      //   "Not measured yet: time from prompt to PR, validation pass rate and number of people using it. The 10x speed goal is a target, not a result. TODO: add numbers from a pilot.",
     },
   },
 
@@ -1191,14 +1203,23 @@ unsupportedAssumptions   // explicit list, or none`,
         "A structured Slack form captures each request in one step. A Sheets pipeline scores and routes requests into Linear, so the DS team works from one queue.",
       media: [
         {
-          kind: "diagram",
-          title: "Intake → Triage → Delivery",
-          caption: "TODO: replace with the flow diagram. Slack modal → Sheets scoring → Linear issue → Slack status reply.",
+          kind: "image",
+          wide: true,
+          title: "Intake, triage and delivery",
+          caption: "Illustrative. A request is submitted in Slack, scored in a sheet, tracked as one Linear issue, and the status is replied to in the same channel.",
+          src: "/projects/automated-ds-support-ecosystem/intake-flow.svg",
+          alt: "Diagram of three stages: a request form in Slack, a scoring sheet, and a tracked Linear issue, with a status reply sent back to Slack.",
+          width: 1000,
+          height: 520,
         },
         {
-          kind: "ui",
-          title: "Slackbot modal",
-          caption: "TODO: replace with a screenshot of the Block Kit request form.",
+          kind: "image",
+          title: "Slackbot request form",
+          caption: "Illustrative, not a screenshot. The standard form that replaces open posts in the support channel.",
+          src: "/projects/automated-ds-support-ecosystem/slackbot-modal.svg",
+          alt: "A generic request form with fields for the query, query type, platform, description and optional references, with close and submit buttons.",
+          width: 640,
+          height: 780,
         },
       ],
       decisions: [

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="t d">
+  <title id="t">Video thumbnail: a prompt through the MCP server</title>
+  <desc id="d">Three stages: a prompt, the design system tools, and a generated screen.</desc>
+  <rect width="1280" height="720" fill="#151412"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#c6553a"/>
+    </marker>
+  </defs>
+  <text x="80" y="110" font-family="Helvetica, Arial, sans-serif" font-size="20" letter-spacing="3" fill="#9a9ca5">PROMPT → MCP → SCREEN</text>
+  <g stroke="#4a4e58" stroke-width="2" fill="#1d1f24">
+    <rect x="80" y="230" width="300" height="200" rx="14"/>
+    <rect x="490" y="230" width="300" height="200" rx="14"/>
+    <rect x="900" y="230" width="300" height="200" rx="14"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#f2f2f4">
+    <text x="230" y="290" font-size="14" fill="#9a9ca5" letter-spacing="2">01 · PROMPT</text>
+    <text x="230" y="340" font-size="28" font-weight="700">Write a prompt</text>
+    <text x="640" y="290" font-size="14" fill="#9a9ca5" letter-spacing="2">02 · TOOLS</text>
+    <text x="640" y="340" font-size="28" font-weight="700">Tools and tokens</text>
+    <text x="1050" y="290" font-size="14" fill="#9a9ca5" letter-spacing="2">03 · SCREEN</text>
+    <text x="1050" y="340" font-size="28" font-weight="700">On-system result</text>
+  </g>
+  <g stroke="#c6553a" stroke-width="3" fill="none" marker-end="url(#a)">
+    <line x1="392" y1="330" x2="482" y2="330"/>
+    <line x1="802" y1="330" x2="892" y2="330"/>
+  </g>
+  <text x="80" y="560" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#9a9ca5">Illustrative thumbnail. Press play to watch the recording.</text>
+</svg>

@@ -61,7 +61,10 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col gap-2 font-mono text-micro text-fg-3 sm:flex-row sm:justify-between">
           <span>© 2026 {site.name}</span>
-          <span>Set in Bricolage Grotesque and IBM Plex · press I to inspect</span>
+          <span className="flex flex-wrap gap-x-4">
+            <a href="/privacy" className="hover:text-accent">Privacy</a>
+            <span>Set in Bricolage Grotesque and IBM Plex · press I to inspect</span>
+          </span>
         </div>
       </div>
     </footer>
