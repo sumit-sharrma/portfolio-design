@@ -8,6 +8,7 @@ import { Bricolage_Grotesque, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/goo
 import "./globals.css";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { CookieBanner } from "@/components/site/CookieBanner";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 import { InspectProvider } from "@/components/inspect/Inspect";
 import { site } from "@/lib/site";
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             <SiteFooter />
+            <CookieBanner />
           </InspectProvider>
         </MotionProvider>
       </body>

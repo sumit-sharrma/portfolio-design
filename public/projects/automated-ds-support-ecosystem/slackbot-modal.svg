@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 780" role="img" aria-labelledby="t d">
+  <title id="t">Illustrative Slackbot request form</title>
+  <desc id="d">A generic modal with fields for a request: query, query type, platform, description, attachments, and close and submit buttons.</desc>
+  <rect width="640" height="780" rx="14" fill="#1b1d22" stroke="#34373f"/>
+  <text x="40" y="70" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#f2f2f4">Design support request</text>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e6e6ea">
+    <text x="40" y="150" font-weight="600">Query</text>
+    <text x="40" y="282" font-weight="600">Query type</text>
+    <text x="40" y="390" font-weight="600">Platform</text>
+    <text x="40" y="498" font-weight="600">Description</text>
+    <text x="40" y="652" font-weight="600">References <tspan font-weight="400" fill="#9a9ca5">(optional)</tspan></text>
+  </g>
+  <g fill="#23262d" stroke="#4a4e58" stroke-width="1.5">
+    <rect x="40" y="166" width="560" height="56" rx="8"/>
+    <rect x="40" y="296" width="560" height="56" rx="8"/>
+    <rect x="40" y="404" width="560" height="56" rx="8"/>
+    <rect x="40" y="512" width="560" height="120" rx="8"/>
+    <rect x="40" y="668" width="200" height="50" rx="8" fill="#2c2f37"/>
+  </g>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#7d8089">
+    <text x="62" y="201">Write something</text>
+    <text x="62" y="331">Select an option</text>
+    <text x="62" y="439">Select an option</text>
+    <text x="62" y="548">Write something</text>
+  </g>
+  <g fill="none" stroke="#9a9ca5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M572 326 l8 8 8 -8"/>
+    <path d="M572 434 l8 8 8 -8"/>
+  </g>
+  <rect x="264" y="668" width="0" height="0"/>
+  <text x="62" y="700" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#e6e6ea">Upload file</text>
+  <line x1="40" y1="716" x2="600" y2="716" stroke="#34373f"/>
+  <rect x="380" y="730" width="104" height="36" rx="8" fill="none" stroke="#4a4e58" stroke-width="1.5"/>
+  <text x="432" y="754" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#e6e6ea">Close</text>
+  <rect x="496" y="730" width="104" height="36" rx="8" fill="#2f8f5b"/>
+  <text x="548" y="754" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#ffffff">Submit</text>
+</svg>

@@ -8,7 +8,7 @@
 // ──────────────────────────────────────────────────────────────
 import { useState, type KeyboardEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import type { MediaBlock } from "@/lib/projects";
 import { Media } from "./CaseSolution";
 import { cn } from "@/lib/utils";
@@ -21,7 +21,7 @@ export function AreaTabs({ blocks }: { blocks: MediaBlock[] }) {
   const base = "tide-area";
 
   const select = (n: number) => {
-    posthog.capture("case_area_selected", { area_index: n });
+    track("case_area_selected", { area_index: n });
     setI(n);
     document.getElementById(`${base}-tab-${n}`)?.focus();
   };

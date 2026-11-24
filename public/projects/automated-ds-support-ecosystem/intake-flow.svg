@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" role="img" aria-labelledby="t d">
+  <title id="t">Illustrative request flow</title>
+  <desc id="d">A request is submitted in a Slack form, scored in a sheet, turned into a Linear issue, and the status is replied to in Slack.</desc>
+  <rect width="1000" height="520" rx="14" fill="#1b1d22" stroke="#34373f"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#c6553a"/>
+    </marker>
+  </defs>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#e6e6ea" text-anchor="middle">
+    <g stroke="#4a4e58" stroke-width="1.5" fill="#23262d">
+      <rect x="40" y="170" width="230" height="130" rx="12"/>
+      <rect x="385" y="170" width="230" height="130" rx="12"/>
+      <rect x="730" y="170" width="230" height="130" rx="12"/>
+    </g>
+    <text x="155" y="222" font-size="13" fill="#9a9ca5" letter-spacing="2">01 · INTAKE</text>
+    <text x="155" y="262" font-size="24" font-weight="700">Request form</text>
+    <text x="155" y="290" font-size="16" fill="#9a9ca5">Submitted in chat</text>
+    <text x="500" y="222" font-size="13" fill="#9a9ca5" letter-spacing="2">02 · TRIAGE</text>
+    <text x="500" y="262" font-size="24" font-weight="700">Scoring sheet</text>
+    <text x="500" y="290" font-size="16" fill="#9a9ca5">Ranked and routed</text>
+    <text x="845" y="222" font-size="13" fill="#9a9ca5" letter-spacing="2">03 · DELIVERY</text>
+    <text x="845" y="262" font-size="24" font-weight="700">Tracked issue</text>
+    <text x="845" y="290" font-size="16" fill="#9a9ca5">One queue for the team</text>
+  </g>
+  <g stroke="#c6553a" stroke-width="2" fill="none" marker-end="url(#a)">
+    <line x1="272" y1="235" x2="377" y2="235"/>
+    <line x1="617" y1="235" x2="722" y2="235"/>
+  </g>
+  <path d="M845 302 L845 390 L155 390 L155 306" stroke="#4a4e58" stroke-width="2" fill="none" stroke-dasharray="6 6" marker-end="url(#a)"/>
+  <g font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#9a9ca5" text-anchor="middle">
+    <text x="500" y="420">Status reply posted back in chat</text>
+  </g>
+  <rect x="40" y="440" width="920" height="50" rx="10" fill="#23262d" stroke="#34373f"/>
+  <text x="500" y="471" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#9a9ca5">Illustrative only. Not a screenshot of a production system.</text>
+</svg>

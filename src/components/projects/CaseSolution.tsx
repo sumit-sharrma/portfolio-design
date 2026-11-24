@@ -5,6 +5,7 @@
 //   code    real code in a panel
 //   table   a data table (set wide: true to span both columns)
 //   route   a chain of steps drawn top to bottom
+//   video   an MP4 linked from another host (videoSrc), with native controls
 //   layers  a token-mapping diagram across three layers (map)
 //   converge  animated "many files into one" (count, labels, target)
 //   image   a real screenshot from public/ (needs src, alt, width, height)
@@ -110,6 +111,24 @@ function MediaBody({ block }: { block: MediaBlock }) {
           width={block.width}
           height={block.height}
         />
+      </div>
+    );
+  }
+
+  if (block.kind === "video" && block.videoSrc) {
+    return (
+      <div className="bg-bg p-3 sm:p-5">
+        <video
+          src={block.videoSrc}
+          poster={block.videoPoster}
+          controls
+          playsInline
+          preload="none"
+          aria-label={block.title}
+          className="h-auto w-full rounded-sm bg-surface"
+          style={block.width && block.height ? { aspectRatio: `${block.width} / ${block.height}` } : undefined}
+        />
+        <p className="mt-2 font-mono text-micro text-fg-3">Video · plays in the page</p>
       </div>
     );
   }

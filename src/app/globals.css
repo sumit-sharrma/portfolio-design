@@ -63,6 +63,8 @@
 html {
   background: var(--color-bg);
   -webkit-text-size-adjust: 100%;
+  /* in-page links glide instead of jumping */
+  scroll-behavior: smooth;
 }
 
 body {

@@ -10,7 +10,7 @@
 // ──────────────────────────────────────────────────────────────
 import { useState } from "react";
 import { motion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import type { BrandSpec } from "@/lib/projects";
 import { cn } from "@/lib/utils";
 
@@ -28,11 +28,11 @@ export function BrandExplorer({ brands }: { brands: BrandSpec[] }) {
   const k = device === "desktop" ? 0.7 : 1;
   const radius = Math.min(brand.radius, 22);
   const selectBrand = (index: number) => {
-    posthog.capture("brand_explorer_changed", { control: "brand", option_index: index });
+    track("brand_explorer_changed", { control: "brand", option_index: index });
     setB(index);
   };
   const selectDevice = (index: number) => {
-    posthog.capture("brand_explorer_changed", { control: "device", option_index: index });
+    track("brand_explorer_changed", { control: "device", option_index: index });
     setDevice(devices[index].key);
   };
 

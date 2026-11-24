@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -30,7 +30,8 @@ export function ImageLightbox({
   const [open, setOpen] = useState(false);
   const trigger = useRef<HTMLButtonElement>(null);
   const closeBtn = useRef<HTMLButtonElement>(null);
-  const remote = src.startsWith("http");
+  // Remote links and SVG files are served as they are, without the image optimizer
+  const remote = src.startsWith("http") || src.endsWith(".svg");
 
   useEffect(() => {
     if (!open) return;
@@ -48,7 +49,7 @@ export function ImageLightbox({
   }, [open]);
 
   const openLightbox = () => {
-    posthog.capture("image_lightbox_opened");
+    track("image_lightbox_opened");
     setOpen(true);
   };
 

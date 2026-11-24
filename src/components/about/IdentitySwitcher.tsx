@@ -9,7 +9,7 @@
 // ──────────────────────────────────────────────────────────────
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useAnimate, useReducedMotion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import { identities, type Shape } from "@/lib/about";
 import { site } from "@/lib/site";
 
@@ -25,7 +25,7 @@ export function IdentitySwitcher() {
 
   function next() {
     const nextIndex = (index + 1) % identities.length;
-    posthog.capture("identity_view_changed", { identity_index: nextIndex });
+    track("identity_view_changed", { identity_index: nextIndex });
     setIndex(nextIndex);
     setBurst((b) => ({ n: b.n + 1, bits: makeBits() }));
   }
@@ -34,7 +34,7 @@ export function IdentitySwitcher() {
     <div>
       <Avatar shape={id.shape} color={id.color} />
 
-      <p className="display mt-6 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">{site.name}</p>
+      <h1 className="display mt-6 text-3xl font-semibold tracking-tight text-fg sm:text-4xl">{site.name}</h1>
       <p className="display mt-1 text-3xl tracking-tight text-fg-3 sm:text-4xl" data-spec="text.title · font.display · color.fg-3">
         is a{" "}
         <span className="relative inline-block">

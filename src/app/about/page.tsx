@@ -5,7 +5,7 @@
 // ──────────────────────────────────────────────────────────────
 import type { Metadata } from "next";
 import { IdentitySwitcher } from "@/components/about/IdentitySwitcher";
-import { Reveal, Stagger, StaggerItem } from "@/components/motion/Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { experience, toolkit } from "@/lib/about";
 
 export const metadata: Metadata = {
@@ -28,9 +28,10 @@ export default function AboutPage() {
               Experience
             </h2>
           </Reveal>
-          <Stagger as="ol" onView gap={0.06} className="divide-y divide-line">
+          {/* Not animated: the list is the page's largest content and must show on first paint */}
+          <ol className="divide-y divide-line">
             {experience.map((e, i) => (
-              <StaggerItem as="li" key={e.company} className="py-5">
+              <li key={e.company} className="py-5">
                 <p className="flex items-center gap-2 font-mono text-micro text-fg-3">
                   {i === 0 && <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />}
                   {e.period}
@@ -38,9 +39,9 @@ export default function AboutPage() {
                 <p className="display mt-1 text-xl font-semibold tracking-tight text-fg">{e.company}</p>
                 <p className="text-sm text-fg-2">{e.role}</p>
                 <p className="mt-2 text-sm leading-relaxed text-fg-3">{e.note}</p>
-              </StaggerItem>
+              </li>
             ))}
-          </Stagger>
+          </ol>
         </section>
       </div>
 
