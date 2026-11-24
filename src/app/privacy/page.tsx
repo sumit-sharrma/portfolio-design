@@ -28,8 +28,8 @@ export default function PrivacyPage() {
             features such as the case-study image viewer, the Inspect mode, and the contact links.
           </p>
           <p className="mt-3">
-            PostHog may also record how the pages are used and look (session replay). Text typed into fields
-            is not recorded, as the site has no fields for visitors to fill in.
+            PostHog may also record session replays, which show how pages are scrolled and clicked. The site
+            has no forms, so visitors do not enter personal details into it.
           </p>
         </section>
 
