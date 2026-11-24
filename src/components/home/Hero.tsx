@@ -79,12 +79,14 @@ export function Hero() {
 
       <div className="mt-12 grid gap-12 border-t border-line pt-8 md:grid-cols-12 md:gap-4">
         <Stagger delay={0.45} gap={0.09} className="md:col-span-6">
-          <StaggerItem as="p" className="max-w-[52ch] text-lede text-fg-2">
+          {/* Not animated: this is the page's largest text, so it must be visible in the HTML
+              on first paint rather than wait for the scripts to fade it in. */}
+          <p className="max-w-[52ch] text-lede text-fg-2">
             <span data-spec="text.lede · font.sans · color.fg-2">
               I’m <span className="text-fg">{site.name}</span>. A Lead Product Designer and former Software
               Engineer who builds scalable design systems, automated tooling, and AI-assisted workflows.
             </span>
-          </StaggerItem>
+          </p>
 
           <StaggerItem className="mt-8 flex flex-wrap gap-3">
             <a
@@ -131,9 +133,9 @@ export function Hero() {
             ))}
             <div className="grid grid-cols-3 divide-x divide-line">
               {figures.map((f) => (
-                <div key={f.label} className="px-4 py-3">
-                  <dd className="display text-2xl font-semibold tracking-tight text-fg">{f.value}</dd>
+                <div key={f.label} className="flex flex-col-reverse px-4 py-3">
                   <dt className="mt-0.5 font-mono text-micro text-fg-3">{f.label}</dt>
+                  <dd className="display text-2xl font-semibold tracking-tight text-fg">{f.value}</dd>
                 </div>
               ))}
             </div>

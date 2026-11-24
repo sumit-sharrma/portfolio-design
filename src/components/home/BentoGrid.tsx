@@ -199,12 +199,12 @@ function RecordTile() {
       </div>
       <dl className="flex flex-1 flex-col divide-y divide-line">
         {rows.map((r) => (
-          <div key={r.label} className="flex flex-1 flex-col justify-center px-4 py-3">
-            <dd className="display text-4xl font-semibold tracking-tight text-fg">{r.value}</dd>
+          <div key={r.label} className="flex flex-1 flex-col-reverse justify-center px-4 py-3">
             <dt className="mt-1 flex items-baseline justify-between gap-3 text-sm text-fg-2">
               {r.label}
               <span className="font-mono text-micro text-fg-3">{r.src}</span>
             </dt>
+            <dd className="display text-4xl font-semibold tracking-tight text-fg">{r.value}</dd>
           </div>
         ))}
       </dl>
