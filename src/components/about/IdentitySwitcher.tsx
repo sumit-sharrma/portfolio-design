@@ -9,7 +9,7 @@
 // ──────────────────────────────────────────────────────────────
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion, useAnimate, useReducedMotion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import { identities, type Shape } from "@/lib/about";
 import { site } from "@/lib/site";
 
@@ -25,7 +25,7 @@ export function IdentitySwitcher() {
 
   function next() {
     const nextIndex = (index + 1) % identities.length;
-    posthog.capture("identity_view_changed", { identity_index: nextIndex });
+    track("identity_view_changed", { identity_index: nextIndex });
     setIndex(nextIndex);
     setBurst((b) => ({ n: b.n + 1, bits: makeBits() }));
   }

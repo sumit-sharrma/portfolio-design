@@ -5,8 +5,9 @@
 // Email) and a colophon naming what the site is set in.
 // ──────────────────────────────────────────────────────────────
 import { ArrowUpRight } from "lucide-react";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import { site } from "@/lib/site";
+import { CookieSettingsButton } from "@/components/site/CookieBanner";
 
 const links = [
   { label: "LinkedIn", href: site.links.linkedin },
@@ -37,11 +38,7 @@ export function SiteFooter() {
                     href={l.href}
                     onClick={() => {
                       const destination = l.label.toLowerCase();
-                      posthog.capture("contact_link_clicked", { destination });
-                      posthog.logger.info("Portfolio contact link selected", {
-                        event_name: "portfolio_contact_link_selected",
-                        destination,
-                      });
+                      track("contact_link_clicked", { destination });
                     }}
                     {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
                     className="group flex items-center justify-between py-3 text-sm text-fg-2 transition-colors duration-150 hover:text-accent"
@@ -63,6 +60,7 @@ export function SiteFooter() {
           <span>© 2026 {site.name}</span>
           <span className="flex flex-wrap gap-x-4">
             <a href="/privacy" className="hover:text-accent">Privacy</a>
+            <CookieSettingsButton />
             <span>Set in Bricolage Grotesque and IBM Plex · press I to inspect</span>
           </span>
         </div>

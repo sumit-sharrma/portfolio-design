@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -49,7 +49,7 @@ export function ImageLightbox({
   }, [open]);
 
   const openLightbox = () => {
-    posthog.capture("image_lightbox_opened");
+    track("image_lightbox_opened");
     setOpen(true);
   };
 

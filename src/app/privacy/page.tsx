@@ -23,9 +23,10 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display text-xl font-semibold text-fg">What this site collects</h2>
           <p className="mt-3">
-            This site has no accounts, comment sections or contact forms. It uses PostHog, an analytics
-            service, to record anonymous usage: page views, how you move between pages, and clicks on
-            features such as the case-study image viewer, the Inspect mode, and the contact links.
+            This site has no accounts, comment sections or contact forms. If you accept analytics in the
+            cookie banner, it uses PostHog, an analytics service, to record anonymous usage: page views,
+            how you move between pages, and clicks on features such as the case-study image viewer, the
+            Inspect mode, and the contact links. If you decline, none of this is recorded.
           </p>
           <p className="mt-3">
             PostHog may also record session replays, which show how pages are scrolled and clicked. The site
@@ -36,8 +37,10 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display text-xl font-semibold text-fg">Cookies and local storage</h2>
           <p className="mt-3">
-            PostHog stores a random identifier in your browser (a cookie and local storage) so it can count
-            visits without knowing who you are. You can clear these at any time in your browser settings.
+            Your choice (accept or decline) is stored in your browser’s local storage, so the banner does not
+            ask again. Only if you accept does PostHog store a random identifier in your browser, in a cookie
+            and local storage, so it can count visits without knowing who you are. You can change your choice
+            at any time with “Cookie settings” in the footer, or clear the stored data in your browser.
           </p>
         </section>
 

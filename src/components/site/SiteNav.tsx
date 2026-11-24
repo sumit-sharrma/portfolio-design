@@ -8,7 +8,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import { nav, site } from "@/lib/site";
 import { useInspect } from "@/components/inspect/Inspect";
 import { cn } from "@/lib/utils";
@@ -20,11 +20,7 @@ export function SiteNav() {
     href === "/" ? pathname === "/" || pathname.startsWith("/projects") : pathname.startsWith(href);
   const toggleInspect = () => {
     const enabled = !on;
-    posthog.capture("inspect_mode_toggled", { enabled });
-    posthog.logger.info("Portfolio inspection mode changed", {
-      event_name: "portfolio_inspection_mode_changed",
-      enabled,
-    });
+    track("inspect_mode_toggled", { enabled });
     toggle();
   };
 

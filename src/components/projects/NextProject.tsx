@@ -5,7 +5,7 @@
 // ──────────────────────────────────────────────────────────────
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import { categoryLabel, type Project } from "@/lib/projects";
 import { Reveal } from "@/components/motion/Reveal";
 import { Card } from "@/components/ui/Card";
@@ -16,7 +16,7 @@ export function NextProject({ project }: { project: Project }) {
       <Link
         href={`/projects/${project.slug}`}
         onClick={() =>
-          posthog.capture("project_opened", {
+          track("project_opened", {
             project_slug: project.slug,
             project_category: project.category,
             navigation_source: "next_project",

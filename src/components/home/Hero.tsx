@@ -9,7 +9,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
-import posthog from "posthog-js";
+import { track } from "@/lib/analytics";
 import { Stagger, StaggerItem } from "@/components/motion/Reveal";
 import { site } from "@/lib/site";
 
@@ -92,11 +92,7 @@ export function Hero() {
             <a
               href="#work"
               onClick={() => {
-                posthog.capture("work_section_requested");
-                posthog.logger.info("Portfolio work section requested", {
-                  event_name: "portfolio_work_section_requested",
-                  interaction: "hero_cta",
-                });
+                track("work_section_requested");
               }}
               className="group inline-flex h-11 items-center gap-2 rounded-[var(--radius-control)] bg-fg px-5 text-sm font-medium text-bg transition-[background-color,transform] duration-150 ease-snap hover:bg-accent active:scale-[0.97]"
               data-spec="button.primary · radius.control · color.fg"
@@ -106,7 +102,7 @@ export function Hero() {
             </a>
             <Link
               href="/about"
-              onClick={() => posthog.capture("about_page_requested")}
+              onClick={() => track("about_page_requested")}
               className="group inline-flex h-11 items-center gap-2 rounded-[var(--radius-control)] border border-line-2 px-5 text-sm font-medium text-fg transition-colors duration-150 hover:border-accent hover:text-accent"
               data-spec="button.secondary · radius.control · rule.line-2"
             >
