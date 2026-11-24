@@ -15,6 +15,16 @@ import { site } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
+// Glides to the Work section. Respects the reduced-motion setting: no glide, just a jump.
+function goToWork(e: React.MouseEvent<HTMLAnchorElement>) {
+  const target = document.getElementById("work");
+  if (!target) return;
+  e.preventDefault();
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  window.history.replaceState(null, "", "#work");
+}
+
 const line1 = ["Architecting", "systems"];
 const line2 = ["where", "design", "meets", "logic."];
 
@@ -91,8 +101,9 @@ export function Hero() {
           <StaggerItem className="mt-8 flex flex-wrap gap-3">
             <a
               href="#work"
-              onClick={() => {
+              onClick={(e) => {
                 track("work_section_requested");
+                goToWork(e);
               }}
               className="group inline-flex h-11 items-center gap-2 rounded-[var(--radius-control)] bg-fg px-5 text-sm font-medium text-bg transition-[background-color,transform] duration-150 ease-snap hover:bg-accent active:scale-[0.97]"
               data-spec="button.primary · radius.control · color.fg"
