@@ -7,7 +7,7 @@
 // ──────────────────────────────────────────────────────────────
 import { useEffect, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { acceptAnalytics, declineAnalytics, getConsent } from "@/lib/analytics";
+import { acceptAnalytics, declineAnalytics, getRegion, getStoredChoice } from "@/lib/analytics";
 
 export const OPEN_COOKIE_SETTINGS = "open-cookie-settings";
 
@@ -16,10 +16,13 @@ export const OPEN_COOKIE_SETTINGS = "open-cookie-settings";
 const noSubscribe = () => () => {};
 
 export function CookieBanner() {
-  const stored = useSyncExternalStore(noSubscribe, getConsent, () => "pending" as const);
-  // null = follow the saved choice; true/false = set by the buttons or the footer link
+  const stored = useSyncExternalStore(noSubscribe, getStoredChoice, () => "pending" as const);
+  const region = useSyncExternalStore(noSubscribe, getRegion, () => "pending" as const);
+  // null = follow the saved choice and region; true/false = set by the buttons or the footer link
   const [override, setOverride] = useState<boolean | null>(null);
-  const visible = override ?? stored === null;
+  // Only EU visitors are asked. Everyone else is measured without a banner.
+  const needsChoice = stored === null && region !== "other";
+  const visible = override ?? needsChoice;
 
   useEffect(() => {
     const show = () => setOverride(true);
@@ -73,6 +76,9 @@ export function CookieBanner() {
 
 /** Footer button that reopens the banner so a visitor can change their choice. */
 export function CookieSettingsButton() {
+  const region = useSyncExternalStore(noSubscribe, getRegion, () => "pending" as const);
+  // There is no banner outside the EU, so there is nothing to reopen.
+  if (region === "other") return null;
   return (
     <button
       type="button"
