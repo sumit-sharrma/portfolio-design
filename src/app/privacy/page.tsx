@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "How this site collects and uses anonymous usage data.",
 };
 
-const updated = "24 November 2026";
+const updated = "25 November 2026";
 
 export default function PrivacyPage() {
   return (
@@ -23,10 +23,15 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display text-xl font-semibold text-fg">What this site collects</h2>
           <p className="mt-3">
-            This site has no accounts, comment sections or contact forms. If you accept analytics in the
-            cookie banner, it uses PostHog, an analytics service, to record anonymous usage: page views,
-            how you move between pages, and clicks on features such as the case-study image viewer, the
-            Inspect mode, and the contact links. If you decline, none of this is recorded.
+            This site has no accounts, comment sections or contact forms. It uses PostHog, an analytics
+            service, to record anonymous usage: page views, how you move between pages, and clicks on
+            features such as the case-study image viewer, the Inspect mode, and the contact links.
+          </p>
+          <p className="mt-3">
+            Whether you are asked first depends on where you are. Visitors in the European Union or the United
+            Kingdom see a cookie banner and are measured only if they accept. If you decline, none of this is
+            recorded. Visitors from anywhere else do not see a banner, and anonymous usage is recorded for them
+            by default.
           </p>
           <p className="mt-3">
             PostHog may also record session replays, which show how pages are scrolled and clicked. The site
@@ -37,10 +42,17 @@ export default function PrivacyPage() {
         <section>
           <h2 className="display text-xl font-semibold text-fg">Cookies and local storage</h2>
           <p className="mt-3">
-            Your choice (accept or decline) is stored in your browser’s local storage, so the banner does not
-            ask again. Only if you accept does PostHog store a random identifier in your browser, in a cookie
-            and local storage, so it can count visits without knowing who you are. You can change your choice
-            at any time with “Cookie settings” in the footer, or clear the stored data in your browser.
+            The site sets a cookie called <span className="font-mono text-[13px]">visitor-region</span> that
+            records whether your request came from the EU or UK, or from elsewhere. The country is detected from your
+            IP address by the hosting provider, Vercel. The cookie holds no personal details and expires after
+            30 days. It decides whether the cookie banner is shown.
+          </p>
+          <p className="mt-3">
+            Choices made in the banner (accept or decline) are stored in the browser’s local storage, so the
+            banner does not ask again. PostHog stores a random identifier in the browser, in a cookie and local
+            storage, only once analytics is running for you: after you accept in the EU or UK, or by default
+            elsewhere. The identifier lets PostHog count visits without knowing who you are. Visitors in the EU or UK can change their choice
+            at any time with “Cookie settings” in the footer, or clear the stored data in the browser.
           </p>
         </section>
 

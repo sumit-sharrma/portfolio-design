@@ -25,13 +25,30 @@ function isLiveSite(): boolean {
   return !local;
 }
 
-export function getConsent(): Consent | null {
+/** The visitor's saved choice, or null if they have not chosen yet. */
+export function getStoredChoice(): Consent | null {
   try {
     const v = window.localStorage.getItem(CONSENT_KEY);
     return v === "accepted" || v === "declined" ? v : null;
   } catch {
     return null;
   }
+}
+
+/** "eu" or "other", from the cookie set by src/proxy.ts. Null before it is set. */
+export function getRegion(): "eu" | "other" | null {
+  const match = document.cookie.match(/(?:^|;\s*)visitor-region=(eu|other)/);
+  return match ? (match[1] as "eu" | "other") : null;
+}
+
+/**
+ * Whether analytics may run. Outside the EU there is no banner, so analytics runs by default.
+ * Inside the EU, it runs only after the visitor accepts.
+ */
+export function getConsent(): Consent | null {
+  const stored = getStoredChoice();
+  if (stored !== null) return stored;
+  return getRegion() === "other" ? "accepted" : null;
 }
 
 function saveConsent(value: Consent) {
