@@ -14,7 +14,7 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/sumit-sharma-a7719447/",
     github: "https://github.com/sumit-sharrma",
     // Drop your PDF at public/resume.pdf and this link works as-is.
-    resume: "/resume.pdf",
+    resume: "/sumit-sharma.pdf",
   },
 } as const;
 
